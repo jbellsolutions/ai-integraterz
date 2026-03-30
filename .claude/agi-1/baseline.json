@@ -1,8 +1,9 @@
 {
   "timestamp": "2026-03-29T00:00:00Z",
-  "gstack_score": 35,
-  "ai_readiness_score": 45,
-  "healing_learning_score": 5,
-  "combined_score": 85,
-  "iteration": 0
+  "gstack_score": 92,
+  "ai_readiness_score": 93,
+  "healing_learning_score": 48,
+  "combined_score": 233,
+  "iteration": 0,
+  "note": "Baseline for AGI-1 run 2 (post-publish). Previous run ended at 233/250."
 }

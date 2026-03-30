@@ -2,3 +2,8 @@
 {"iteration":2,"gstack":90,"ai":88,"hl":42,"combined":220,"changes":[".agent/agent.py",".gitignore","triggers/setup-triggers.sh"],"assertions":"ALL_PASS"}
 {"iteration":3,"gstack":90,"ai":92,"hl":48,"combined":230,"changes":[".claude/healing/healer.md",".claude/healing/history.json",".claude/learning/learner.md"],"assertions":"ALL_PASS"}
 {"iteration":4,"gstack":92,"ai":93,"hl":48,"combined":233,"changes":["docs/README.md",".claude/agi-1/iterations.jsonl"],"assertions":"ALL_PASS"}
+{"run":2,"iteration":1,"gstack":97,"ai":93,"hl":48,"combined":238,"changes":["ci.yml","CONTRIBUTING.md","SECURITY.md"],"assertions":"ALL_PASS"}
+{"run":2,"iteration":2,"gstack":97,"ai":97,"hl":48,"combined":242,"changes":[".claude/commands/new-client.md",".claude/commands/build-client.md",".claude/commands/package-client.md",".claude/commands/pipeline-status.md",".claude/commands/run-agent.md",".claude/commands/smoke-test.md"],"assertions":"ALL_PASS"}
+{"run":2,"iteration":3,"gstack":97,"ai":99,"hl":50,"combined":246,"changes":["lib/healer.sh","lib/learner.sh","SKILL.md"],"assertions":"ALL_PASS"}
+{"run":2,"iteration":4,"gstack":99,"ai":99,"hl":50,"combined":248,"changes":["tests/integration-test.sh","ci.yml update"],"assertions":"ALL_PASS"}
+{"run":2,"iteration":5,"gstack":99,"ai":99,"hl":50,"combined":248,"changes":["CHANGELOG.md","baseline.json update"],"assertions":"ALL_PASS"}

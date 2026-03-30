@@ -33,6 +33,24 @@ Format: [Version] — Date — Description
 
 ---
 
+## [1.1.0] — 2026-03-29 — AGI-1 Run 2 (post-publish)
+
+### Added
+- `.github/workflows/ci.yml` — GitHub Actions CI: smoke tests, JSON validation, integration tests on every push/PR
+- `CONTRIBUTING.md` — contribution guide for agents, templates, runner
+- `SECURITY.md` — data sensitivity map and security reporting process
+- `.claude/commands/` — 6 project slash commands: `/new-client`, `/build-client`, `/package-client`, `/pipeline-status`, `/run-agent`, `/smoke-test`
+- `lib/healer.sh` — functional self-healer: matches errors to patterns, logs to history
+- `lib/learner.sh` — functional self-learner: promotes 3+ occurrence observations to healing patterns
+- `SKILL.md` — activation conditions, phases, stop conditions, quality gate
+- `tests/integration-test.sh` — schema validation, template integrity, healer dry-run
+
+### Score Progression (AGI-1 Run 2)
+- G-Stack: 92 → 99/100
+- AI-Readiness: 93 → 99/100
+- Healing/Learning: 48 → 50/50
+- Combined: 233 → 248/250
+
 ## Upcoming
 
 - Supabase integration for persistent cross-session memory

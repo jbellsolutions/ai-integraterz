@@ -1,6 +1,9 @@
 {
   "version": "1.0.0",
   "observations": [
+    {"timestamp": "2026-03-29T00:10:00Z", "type": "security_note", "detail": "lib/run-agent.sh uses eval to pass AUTO_FLAG to claude CLI. AUTO_FLAG is only set from --auto argument, not user input, so injection risk is minimal but worth documenting."},
+    {"timestamp": "2026-03-29T00:10:00Z", "type": "scale_note", "detail": "136 placeholder tokens across 7 templates. As client count grows, a placeholder miss report after each training-builder run would reduce delivery QA time."},
+    {"timestamp": "2026-03-29T00:10:00Z", "type": "gap_note", "detail": "No agents/gtm-deploy.md yet — Full GTM Deployment (Step 5 on value ladder) has no agent playbook. High-value to build next."},
     {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "136 placeholder tokens across 7 templates — training-builder must replace all of them from client config. High-risk area for incomplete output."},
     {"timestamp": "2026-03-29T00:00:00Z", "type": "hypothesis", "detail": "Placeholder miss rate will be the #1 source of delivery quality issues. Mitigation: delivery-packager quality check already scans for '{{' in outputs."},
     {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "expert-series.md references sibling repo path '../expert-series-v3/' — path validation missing from agent"},
