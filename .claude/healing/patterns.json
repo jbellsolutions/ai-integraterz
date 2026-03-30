@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "patterns": [
+    {
+      "id": "missing-client-config",
+      "description": "Agent run fails because client config doesn't exist",
+      "trigger": "Client config not found",
+      "fix": "Run extraction agent first: ./lib/run-agent.sh extraction --client <id>",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "placeholder-in-output",
+      "description": "Template placeholder not replaced in deliverable",
+      "trigger": "{{",
+      "fix": "Check training-builder agent — the client config field that maps to this placeholder may be missing or empty",
+      "confidence": 0.9,
+      "occurrences": 0
+    },
+    {
+      "id": "missing-env-key",
+      "description": "Agent fails because environment variable is missing",
+      "trigger": "ANTHROPIC_API_KEY not set",
+      "fix": "Copy .env.example to .env and fill in ANTHROPIC_API_KEY",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "agent-stuck-in-building",
+      "description": "Client pipeline stuck in training_building for >48h",
+      "trigger": "stage: training_building, stage_updated_at older than 48h",
+      "fix": "Re-run training-builder with --auto flag or check for Claude API errors in last run",
+      "confidence": 0.8,
+      "occurrences": 0
+    }
+  ],
+  "last_updated": "2026-03-29"
+}

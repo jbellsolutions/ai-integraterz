@@ -1,0 +1,34 @@
+{
+  "project_name": "ai-integraterz",
+  "description": "Agent-based system that transforms a business discovery call into a complete AI training infrastructure. One extraction call → owner game plan, company adoption doc, role-specific training tracks, CLAUDE.md configs, VA guide, and self-installing delivery repo.",
+  "repo_path": "/Users/home/Desktop/ai-integraterz",
+  "language": "bash + markdown",
+  "framework": "Claude Code (agent playbooks)",
+  "version": "1.0.0",
+  "entry_points": [
+    "lib/run-agent.sh",
+    "lib/new-client.sh",
+    "lib/package-delivery.sh"
+  ],
+  "key_components": [
+    "agents/ — 6 agent playbooks (orchestrator, extraction, training-builder, coaching-setup, delivery-packager, expert-series)",
+    "config/ — project config, thresholds, per-client JSON",
+    "lib/ — bash runners and utilities",
+    "templates/ — output templates (owner, company, roles, va)",
+    "state/ — per-agent run state",
+    "outputs/ — all generated client deliverables"
+  ],
+  "fragile_areas": [
+    "config/clients/ — client data files; never overwrite without explicit instruction",
+    "outputs/ — client deliverables; quality check before packaging",
+    "lib/run-agent.sh — core runner; changes affect all agents",
+    "templates/ — source of truth for output format; changes affect all future clients"
+  ],
+  "optional_modules": [
+    "../expert-series-v3 — Titans Council + Content Multiplier",
+    "../gtm-company — Full autonomous GTM deployment",
+    "../titans-of-direct-response-mastermind-council — 18-agent positioning council"
+  ],
+  "owner": "Justin Bell",
+  "contact": "justin@usingaitoscale.com"
+}

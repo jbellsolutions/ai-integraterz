@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/home/Desktop/ai-integraterz && echo \"[auto-observe] File modified: $CLAUDE_TOOL_RESULT\" >> .claude/learning/observations.jsonl 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/home/Desktop/ai-integraterz && echo \"{\\\"timestamp\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"event\\\":\\\"session_end\\\"}\" >> .claude/learning/sessions.jsonl 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

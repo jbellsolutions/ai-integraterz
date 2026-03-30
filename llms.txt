@@ -1,0 +1,37 @@
+# AI Integraterz
+
+## What This Is
+An agent-based system that takes a business discovery call and automatically builds a complete AI training infrastructure for that business. One extraction call powers all downstream deliverables.
+
+## Primary Use Case
+Business AI training and deployment. A human (Justin Bell) runs a 30-60 minute call with a business owner. Notes or transcript are fed into the system. The system generates: owner AI game plan, company AI adoption document, role-specific training tracks, CLAUDE.md configs per role, VA training guide, company toolkit, and a self-installing delivery repo.
+
+## Tech Stack
+- Runtime: Claude Code (claude-opus-4-6 or claude-sonnet-4-6)
+- Language: Bash (runners), Markdown (agent playbooks + templates)
+- No server required. No build step. Claude Code IS the runtime.
+- Optional: Supabase (persistence), Slack MCP, Google Calendar MCP, ClickUp MCP
+
+## Key Files for LLMs
+- `CLAUDE.md` — How to work in this repo
+- `AGENTS.md` — All agents, their roles, and handoff protocol
+- `ARCHITECTURE.md` — System design and data flow
+- `config/project.json` — Global config and product pricing
+- `config/clients/example-client.json` — Client config schema
+- `agents/orchestrator.md` — Top-level pipeline manager
+- `agents/extraction.md` — Call notes → structured config
+- `agents/training-builder.md` — Config → all deliverables
+- `lib/run-agent.sh` — How to trigger any agent
+
+## Entry Points
+- New client: `./lib/new-client.sh <client-id> [--transcript <file>]`
+- Run any agent: `./lib/run-agent.sh <agent-name> --client <id>`
+- Package delivery: `./lib/package-delivery.sh <client-id>`
+
+## Output Structure
+All client deliverables land in `outputs/<client-id>/delivery-repo/` — a self-contained repo the client opens in Claude Code and installs with one command.
+
+## Business Context
+- Product: AI Integraterz Training Package ($997) + Coaching ($300/mo/seat)
+- Optional modules: Expert Series (Titans Council + content), Full GTM (autonomous email/LinkedIn/content)
+- Owner: Justin Bell, justin@usingaitoscale.com, usingaitoscale.com
