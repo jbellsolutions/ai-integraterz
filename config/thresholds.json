@@ -1,0 +1,28 @@
+{
+  "extraction": {
+    "max_call_duration_minutes": 60,
+    "min_roles_required": 1,
+    "required_fields": ["owner_name", "business_name", "industry", "team_size", "main_problem", "roles"]
+  },
+  "training_builder": {
+    "max_deliverables_per_run": 20,
+    "max_role_tracks": 15,
+    "delivery_deadline_days": 7
+  },
+  "coaching_setup": {
+    "max_seats_per_client": 50,
+    "min_coaching_sessions_per_week": 2,
+    "max_coaching_sessions_per_week": 4
+  },
+  "expert_series": {
+    "titans_council_rounds": 3,
+    "min_content_pieces": 32,
+    "quality_gate_score": 8
+  },
+  "gtm_deploy": {
+    "max_emails_per_day": 200,
+    "max_linkedin_posts_per_day": 3,
+    "min_qualified_conversations_guarantee": 10,
+    "guarantee_window_days": 60
+  }
+}

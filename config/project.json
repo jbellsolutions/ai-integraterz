@@ -1,0 +1,71 @@
+{
+  "project_id": "ai-integraterz",
+  "project_name": "AI Integraterz",
+  "owner": "Justin Bell",
+  "owner_email": "justin@usingaitoscale.com",
+  "website": "usingaitoscale.com",
+  "version": "1.0.0",
+
+  "products": {
+    "training_package": {
+      "name": "AI Integraterz Training Package",
+      "price_usd": 997,
+      "delivery_days": 7,
+      "guarantee": "Double your money back"
+    },
+    "coaching_seat": {
+      "name": "Ongoing Coaching + Certification",
+      "price_per_seat_usd": 300,
+      "billing": "monthly",
+      "guarantee": "Double output in 30 days or money back"
+    },
+    "va_placement": {
+      "name": "AI Integrator VA Placement",
+      "price_usd": "TBD",
+      "billing": "setup + retainer"
+    },
+    "ops_hub": {
+      "name": "AI Operations Hub",
+      "setup_usd": 2000,
+      "billing": "one-time setup"
+    }
+  },
+
+  "optional_modules": {
+    "expert_series": {
+      "repo": "https://github.com/jbellsolutions/expert-series-v3",
+      "description": "Titans Council positioning + Content Multiplier",
+      "enabled": false
+    },
+    "gtm_deploy": {
+      "repo": "https://github.com/jbellsolutions/gtm-company",
+      "description": "Full autonomous GTM — email SDR, LinkedIn, content engine",
+      "enabled": false
+    },
+    "titans_council": {
+      "repo": "https://github.com/jbellsolutions/titans-of-direct-response-mastermind-council",
+      "description": "18-agent copywriter positioning council",
+      "enabled": false
+    }
+  },
+
+  "agents": [
+    "orchestrator",
+    "extraction",
+    "training-builder",
+    "coaching-setup",
+    "expert-series",
+    "gtm-deploy",
+    "delivery-packager"
+  ],
+
+  "slack_channel": "#ai-integraterz-ops",
+  "supabase_tables": [
+    "agent_runs",
+    "clients",
+    "deliverables",
+    "coaching_seats",
+    "episodes",
+    "memories"
+  ]
+}

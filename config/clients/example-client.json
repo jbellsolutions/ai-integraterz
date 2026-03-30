@@ -1,0 +1,75 @@
+{
+  "_comment": "Copy this file to config/clients/<client-id>.json and fill in all fields from the extraction call",
+  "client_id": "example-client",
+  "created_at": "2026-03-29T00:00:00Z",
+  "status": "extraction_complete",
+
+  "business": {
+    "name": "Example Business LLC",
+    "industry": "Professional Services",
+    "team_size": 8,
+    "annual_revenue_range": "$500K-$1M",
+    "current_ai_tools": ["ChatGPT", "Zapier"],
+    "main_problem": "Team not consistently using AI. No standard process.",
+    "90_day_goal": "Every team member using AI daily, output doubled",
+    "website": "example.com"
+  },
+
+  "owner": {
+    "name": "Jane Smith",
+    "role": "CEO",
+    "email": "jane@example.com",
+    "phone": "555-000-0000",
+    "top_ai_uses": [
+      "Daily email management",
+      "Weekly report writing",
+      "Meeting prep and follow-up"
+    ]
+  },
+
+  "roles": [
+    {
+      "title": "CEO",
+      "name": "Jane Smith",
+      "daily_tasks": ["Strategic planning", "Team meetings", "Client calls", "Reporting"],
+      "pain_points": ["Too much time on email", "Reports take 3 hours/week"],
+      "tools_used": ["Gmail", "Zoom", "Google Sheets"]
+    },
+    {
+      "title": "Sales Manager",
+      "name": "Tom Jones",
+      "daily_tasks": ["Prospecting", "Follow-up emails", "CRM updates", "Pipeline review"],
+      "pain_points": ["Follow-up slips through the cracks", "Proposals take too long"],
+      "tools_used": ["HubSpot", "Gmail", "LinkedIn"]
+    },
+    {
+      "title": "Operations Manager",
+      "name": "Sarah Lee",
+      "daily_tasks": ["Scheduling", "Vendor management", "Process documentation", "Reporting"],
+      "pain_points": ["Manual data entry", "Building reports from scratch every week"],
+      "tools_used": ["Google Sheets", "Slack", "Asana"]
+    },
+    {
+      "title": "Marketing Coordinator",
+      "name": "Mike Davis",
+      "daily_tasks": ["Social posts", "Email newsletters", "Blog content", "Ad management"],
+      "pain_points": ["Content takes all week", "No consistent posting schedule"],
+      "tools_used": ["Canva", "Mailchimp", "Buffer"]
+    }
+  ],
+
+  "products_purchased": {
+    "training_package": true,
+    "coaching_seats": 4,
+    "va_placement": false,
+    "ops_hub": false,
+    "expert_series": false,
+    "gtm_deploy": false
+  },
+
+  "delivery": {
+    "package_due_date": "2026-04-05",
+    "delivery_method": "repo + email",
+    "status": "pending"
+  }
+}

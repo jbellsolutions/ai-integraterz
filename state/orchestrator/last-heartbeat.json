@@ -1,0 +1,9 @@
+{
+  "last_run_at": null,
+  "status": "never_run",
+  "clients_active": 0,
+  "clients_stuck": [],
+  "agents_healthy": [],
+  "agents_failed": [],
+  "escalations_open": 0
+}
