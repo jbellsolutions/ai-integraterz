@@ -1,6 +1,11 @@
 {
   "version": "1.0.0",
-  "observations": [],
+  "observations": [
+    {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "136 placeholder tokens across 7 templates — training-builder must replace all of them from client config. High-risk area for incomplete output."},
+    {"timestamp": "2026-03-29T00:00:00Z", "type": "hypothesis", "detail": "Placeholder miss rate will be the #1 source of delivery quality issues. Mitigation: delivery-packager quality check already scans for '{{' in outputs."},
+    {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "expert-series.md references sibling repo path '../expert-series-v3/' — path validation missing from agent"},
+    {"timestamp": "2026-03-29T00:00:00Z", "type": "recommendation", "detail": "Add path existence check to expert-series.md Phase 1 before attempting to use sibling repo"}
+  ],
   "hypotheses": [],
   "confirmed_patterns": [],
   "last_research_run": null
