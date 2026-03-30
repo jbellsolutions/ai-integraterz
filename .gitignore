@@ -1,0 +1,21 @@
+# Environment
+.env
+
+# Client data — never commit real client configs or deliverables
+config/clients/*.json
+!config/clients/example-client.json
+outputs/
+
+# Agent state (auto-generated, not source)
+state/*/last-run.json
+state/orchestrator/escalations.json
+.claude/learning/observations.jsonl
+.claude/learning/sessions.jsonl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
