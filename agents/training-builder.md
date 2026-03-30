@@ -49,20 +49,43 @@ Take a completed client config and build every deliverable in the AI Integraterz
 14. Populate with industry-specific tools and Claude Code setups
 15. Write to `outputs/<client-id>/toolkit/Company-AI-Toolkit-[BusinessName].md`
 
-### Phase 3: Role-Specific Tracks
-16. For EACH role in `client.roles`:
-    a. Read `templates/roles/role-training.md`
-    b. Populate with this specific role's data:
-       - Role title and person's name
-       - Their daily tasks → AI-augmented versions
-       - Their pain points → AI solutions for each
-       - Custom CLAUDE.md config for their responsibilities
-       - 5 most valuable slash commands for their role (written out)
-       - 3 automated workflows using their actual tools
-       - Practice exercises using language from their industry
-       - Performance benchmarks (before/after expectations)
-    c. Write to `outputs/<client-id>/roles/Training-[RoleTitle].md`
-    d. Write CLAUDE.md config to `outputs/<client-id>/roles/CLAUDE-[RoleTitle].md`
+### Phase 3: Role-Specific Tracks — The 10X Package Per Role
+16. For EACH role in `client.roles`, produce THREE deliverables (the full 10X VA package):
+
+   **Deliverable A: Custom AI Course** (per role)
+    a. Read `templates/content/custom-course.md` (or `templates/roles/role-training.md` for the core training track)
+    b. Build a multi-module training curriculum for this specific role:
+       - Module 0: Company-wide foundation (shared across all roles)
+       - Module for this role: uses their actual workflows, their actual tools, their actual language from the call
+       - Each lesson: real task, real Claude prompt, real exercise with their data
+       - Completion = Claude Code Certification for this role
+    c. Write to `outputs/<client-id>/roles/Course-[RoleTitle].md`
+
+   **Deliverable B: Custom Toolkit** (per role)
+    a. Every AI tool this role will use, configured and ready
+    b. Not a generic tool list — specific to what came up on the call for this role
+    c. Pre-written prompts for their top 5 tasks
+    d. MCP connections relevant to their tools (ClickUp, Gmail, Calendar as applicable)
+    e. Custom CLAUDE.md config written for their specific responsibilities and workflow conventions
+    f. 5 most valuable slash commands for their role (written out, copy-paste ready)
+    g. Write CLAUDE.md to `outputs/<client-id>/roles/CLAUDE-[RoleTitle].md`
+    h. Write toolkit to `outputs/<client-id>/roles/Toolkit-[RoleTitle].md`
+
+   **Deliverable C: Custom Operating Manual** (per role)
+    a. SOPs for every AI-enabled workflow this role runs (5-8 SOPs minimum)
+    b. Each SOP: trigger → steps → Claude prompt → expected output → quality check → troubleshooting
+    c. Daily habits: what to do every morning (1 specific habit, 1 prompt)
+    d. Quick reference card: top 5 prompts + top 3 slash commands + "when stuck" fallbacks (print-ready)
+    e. Performance benchmarks: before/after expectations for each major workflow
+    f. Escalation path: who to ask when stuck (AI Integrator name + Justin contact)
+    g. Write to `outputs/<client-id>/roles/OperatingManual-[RoleTitle].md`
+
+   **Quality check per role:**
+    - Course, Toolkit, and Operating Manual all produced (3 files per role minimum)
+    - No `{{` placeholder tokens remain in any file
+    - Role person's name appears correctly
+    - Claude prompts are specific (reference their actual tasks, not generic examples)
+    - Tools match what was mentioned in the call for this role
 
 ### Phase 4: VA Training Guide
 17. Read `templates/va/va-guide.md`
@@ -112,6 +135,8 @@ Take a completed client config and build every deliverable in the AI Integraterz
 ```
 outputs/<client-id>/
 ├── DELIVERY-SUMMARY.md
+├── call-prep/
+│   └── Call-Script-[BusinessName].md       ← Justin's pre-call reference (never sent to client)
 ├── owner/
 │   └── AI-Game-Plan-[Name].md
 ├── company/
@@ -119,10 +144,11 @@ outputs/<client-id>/
 ├── toolkit/
 │   └── Company-AI-Toolkit-[Business].md
 ├── roles/
-│   ├── Training-CEO.md
-│   ├── CLAUDE-CEO.md
-│   ├── Training-SalesManager.md
-│   └── CLAUDE-SalesManager.md (etc.)
+│   ├── Course-[RoleTitle].md               ← Custom AI Course (10X Package A)
+│   ├── Toolkit-[RoleTitle].md              ← Custom Toolkit (10X Package B)
+│   ├── CLAUDE-[RoleTitle].md               ← CLAUDE.md config for this role
+│   ├── OperatingManual-[RoleTitle].md      ← Custom Operating Manual (10X Package C)
+│   └── (above 4 files repeated for each role)
 ├── va/
 │   └── VA-Training-Guide-[Business].md
 ├── certification/
@@ -133,6 +159,8 @@ outputs/<client-id>/
     └── configs/
         └── (all CLAUDE.md files)
 ```
+
+**The 10X Package per role = Course + Toolkit + Operating Manual.** Three files per role, built from what the client said on the call, voice-matched, specific to their actual tasks. This is the full AI Integraterz deliverable — not generic training.
 
 ## Safety Rails
 - Never fabricate client data — use only what's in the config

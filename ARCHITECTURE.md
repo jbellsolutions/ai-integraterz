@@ -6,6 +6,34 @@ AI Integraterz is a markdown-driven, agent-based system. Each agent is a Claude 
 
 The system is intentionally simple: no server required, no database required for core operation, no build step. Claude Code IS the runtime.
 
+**Primary AI runtime:** Claude Code (~80% of every client implementation). OpenClaw is a complementary framework used alongside Claude Code for specific builds where it provides a better fit.
+
+---
+
+## Product Ladder (v5)
+
+```
+FREE  → One-Day Top 10% Claude Ecosystem Certification
+FREE  → The AI Integraterz Blueprint Session (30-min customization call)
+FREE  → 7-Day Course lite version
+$300  → 7-Day Claude Ecosystem Mastery (Top 5%) — company-wide, trust trigger
+$997  → THE 1% BUILD — per division, per role, full ecosystem (this repo delivers it)
+$300/mo/seat → Training Contracts → Fork: Operator Stack (Leg A) / Expert Series + GTM (Leg B)
+```
+
+**See:** `GTM 3.0/PRODUCT_LADDER_V5.md` for full detail.
+
+---
+
+## The 10X Package (Per Role)
+
+Every client built through this repo receives three deliverables per role:
+1. **Custom Course** — multi-module training built from their actual workflows and call transcript
+2. **Custom Toolkit** — configured tools, pre-written prompts, CLAUDE.md, slash commands for this role
+3. **Custom Operating Manual** — SOPs with embedded Claude prompts, daily habits, quick reference card
+
+These three files per role are the full AI Integraterz delivery. Built automatically from the call transcript.
+
 ---
 
 ## Directory Layout
@@ -70,28 +98,57 @@ ai-integraterz/
 ## Data Flow
 
 ```
-DISCOVERY CALL (Justin + client)
+PRE-CALL PREP
         │
-        ▼ call notes / transcript
+        ▼ website / LinkedIn / industry / company size
+┌─────────────────────┐
+│  extraction.md      │ ──► outputs/<id>/call-prep/Call-Script.md
+│  (--pre-call flag)  │     (Justin's reference doc — NEVER sent to client)
+└─────────────────────┘
+        │
+DISCOVERY CALL (Justin + client, 1 hour, recorded)
+        │
+        ▼ call transcript / recording
+┌─────────────────────┐
+│  transcript-parser  │ ──► outputs/<id>/content-engine/00-Content-Strategy.md
+│      .md            │
+└─────────────────────┘
+        │
+        ▼ structured content strategy
 ┌─────────────────────┐
 │   extraction.md     │ ──► config/clients/<id>.json
 └─────────────────────┘
         │
         ▼ structured client config
+┌─────────────────────────────────────────────────┐
+│  training-builder.md                            │
+│                                                 │
+│  Per role (10X Package):                        │
+│  ──► outputs/<id>/roles/Course-[Role].md        │
+│  ──► outputs/<id>/roles/Toolkit-[Role].md       │
+│  ──► outputs/<id>/roles/CLAUDE-[Role].md        │
+│  ──► outputs/<id>/roles/OperatingManual-[R].md  │
+│                                                 │
+│  Company-wide:                                  │
+│  ──► outputs/<id>/owner/                        │
+│  ──► outputs/<id>/company/                      │
+│  ──► outputs/<id>/va/                           │
+└─────────────────────────────────────────────────┘
+        │
+        ▼ (optional, prompted by delivery-packager)
 ┌─────────────────────┐
-│  training-builder   │ ──► outputs/<id>/owner/
-│      .md            │ ──► outputs/<id>/company/
-│                     │ ──► outputs/<id>/roles/
-│                     │ ──► outputs/<id>/va/
+│  content-engine.md  │ ──► outputs/<id>/content-engine/
+│                     │     (9 modules: newsletter, SOPs, challenge, etc.)
 └─────────────────────┘
         │
         ▼ all deliverables complete
 ┌─────────────────────┐
 │ delivery-packager   │ ──► outputs/<id>/delivery-repo/
-│      .md            │     (self-install ZIP for client)
+│      .md            │     (self-install repo for client)
+│                     │     Prompts: "Run Content Engine?" Y/N
 └─────────────────────┘
         │
-        ▼ package sent to client
+        ▼ package reviewed + sent by Justin
 ┌─────────────────────┐
 │  coaching-setup     │ ──► Calendar invites
 │      .md            │ ──► ClickUp tasks
@@ -104,6 +161,12 @@ DISCOVERY CALL (Justin + client)
 │      .md            │ ──► Pipeline monitoring
 │                     │ ──► Escalation handling
 └─────────────────────┘
+
+Sister repos (run alongside AI Integraterz for full builds):
+  AGI-1     → self-healing + self-learning layer (runs on top of every build)
+  Expert Series v3 → Titans Council positioning (18-agent council, 3-round review)
+  Content Multiplier → 32+ content pieces from one transcript
+  GTM Company → Full autonomous GTM (email SDR + LinkedIn + content engine)
 ```
 
 ---
@@ -129,19 +192,22 @@ The client-facing package. A standalone repo structure the client can open in Cl
 
 ## Optional Module Integration
 
-The system is modular. Two optional repos extend it:
+The system is modular. Sister repos extend it for Expert Series and Full GTM clients:
 
 ```
 ~/Desktop/
-├── ai-integraterz/          ← This repo (core)
-├── expert-series-v3/        ← Expert Series module (optional)
-│   └── agents, templates
-├── gtm-company/             ← Full GTM module (optional)
-│   └── agents, triggers
-└── titans-of-direct-response-mastermind-council/  ← Positioning engine
+├── ai-integraterz/                    ← This repo (core — The 1% Build)
+├── Expert Series/
+│   └── expert-series-v3/             ← Titans Council output + positioning
+├── Content-Multiplier-Product/        ← 32+ content pieces from one input
+├── titans-content-multiplier-pipeline/ ← Full pipeline version
+├── gtm-company/                       ← Full GTM: email SDR + LinkedIn + content
+└── Titans Projects/                   ← Extended council projects
 ```
 
 Enabled via `config/project.json → optional_modules.<module>.enabled: true`.
+
+**Retail AI** is used for voice/phone automation in Full GTM implementations (replaces Bland AI).
 
 ---
 
@@ -166,5 +232,6 @@ This keeps agents decoupled and independently runnable.
 | ClickUp | `coaching-setup` | `clickup_create_task` |
 | Gmail | `orchestrator`, `delivery-packager` | `gmail_create_draft` |
 | Supabase | Optional persistence | REST API via bash |
+| Retail AI | Full GTM voice/phone automation | REST API |
 
 All integrations are optional for core operation. The system runs without any of them — agents just skip the notification steps.
