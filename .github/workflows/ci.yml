@@ -42,3 +42,8 @@ jobs:
           test -x lib/new-client.sh || (echo "new-client.sh not executable" && exit 1)
           test -x lib/package-delivery.sh || (echo "package-delivery.sh not executable" && exit 1)
           echo "All lib scripts executable."
+
+      - name: Run integration tests
+        run: bash tests/integration-test.sh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
