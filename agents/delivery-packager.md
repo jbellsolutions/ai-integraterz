@@ -43,8 +43,19 @@ Or via script:
    ├── 04-va/
    ├── 05-certification/
    ├── 06-coaching/
-   └── 07-self-install/
-       └── configs/
+   ├── 07-self-install/
+   │   └── configs/
+   └── 08-content-engine/  (added if Content Engine was run)
+       ├── 00-INDEX.md
+       ├── 01-Custom-AI-Course/
+       ├── 02-SOPs/
+       ├── 03-QuickRef/
+       ├── 04-Newsletter/
+       ├── 05-Comms/
+       ├── 06-Calendar/
+       ├── 07-VideoScripts/
+       ├── 08-Challenge/
+       └── 09-WinsLog/
    ```
 
 7. Copy all outputs into numbered folders (numbered = recommended reading order)
@@ -99,7 +110,41 @@ Or via script:
     - Quality check summary
     - Action needed: "Review and send to client"
 
+### Phase 8: Content Engine Prompt
+After packaging is complete and Slack notification is sent, ask Justin:
+
+```
+✅ Delivery package ready for [Client Name].
+
+Would you like to run the Content Engine?
+
+The Content Engine generates everything that makes AI adoption self-sustaining at [Business Name]:
+
+  1. Custom AI Training Course (multi-module, role-specific)
+  2. Role SOP Library (step-by-step AI workflows per role)
+  3. Quick Reference Cards (one-page cheat sheet per role)
+  4. Internal Newsletter System (3 ready-to-send issues)
+  5. Internal Comms Pack (announcement + 5-email rollout sequence)
+  6. 30-Day Adoption Calendar (daily rollout schedule)
+  7. Role Training Video Scripts (async training, one per role)
+  8. 30-Day AI Adoption Challenge (team competition + tracking)
+  9. AI Wins Log (ongoing documentation + ROI tracking)
+
+To run it, I'll need the call transcript (if not already parsed).
+
+Reply:
+  "yes" — run Content Engine now (I'll ask for the transcript)
+  "skip" — complete delivery without Content Engine
+  "later" — deliver now, run Content Engine separately
+
+Command when ready: ./lib/run-agent.sh transcript-parser --client <client-id> --transcript <file>
+Then: ./lib/run-agent.sh content-engine --client <client-id>
+```
+
+Wait for Justin's response before proceeding. If "yes": run transcript-parser first, then content-engine. If "skip" or no response: close out the delivery state.
+
 ## Safety Rails
 - Never send the package to the client — only Justin does that
 - Never skip the quality check — placeholder text in a delivery is embarrassing
 - If quality check fails on >3 files, halt and alert Justin
+- Content Engine is optional — never run it without Justin's confirmation

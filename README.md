@@ -51,7 +51,9 @@ Available agents:
 - `extraction` — Parse call notes into structured client config
 - `training-builder` — Build all deliverables from client config
 - `coaching-setup` — Set up coaching schedule and ClickUp tasks
-- `delivery-packager` — Package outputs into client delivery repo
+- `delivery-packager` — Package outputs + prompt for Content Engine
+- `transcript-parser` — Parse transcript into Content Strategy doc
+- `content-engine` — Build full content system from strategy doc
 - `expert-series` — Run Titans Council + Content Multiplier (cross-sell)
 - `orchestrator` — Monitor all clients and agent health
 
@@ -96,6 +98,38 @@ ai-integraterz/
 
 ---
 
+## Content Engine
+
+After delivery, the Content Engine generates everything that makes a client's AI adoption self-sustaining. It's prompted automatically at the end of `delivery-packager`.
+
+**Requires:** a call transcript (raw notes or recording transcript)
+
+```bash
+# Step 1: Parse transcript into content strategy
+./lib/run-agent.sh transcript-parser --client <client-id> --transcript path/to/transcript.txt
+
+# Step 2: Build all 9 content modules
+./lib/run-agent.sh content-engine --client <client-id>
+```
+
+**What it produces** (all voice-matched to the client, built from their actual workflows):
+
+| # | Module | What It Is |
+|---|--------|-----------|
+| 1 | Custom AI Course | Multi-module training curriculum, one module per role |
+| 2 | Role SOP Library | Step-by-step AI workflows for every role |
+| 3 | Quick Reference Cards | One-page cheat sheet per role (print-ready) |
+| 4 | Internal Newsletter | 3 ready-to-send monthly team AI updates |
+| 5 | Internal Comms Pack | Announcement + 5-email team rollout sequence |
+| 6 | 30-Day Adoption Calendar | Daily rollout schedule (copy into ClickUp/GCal) |
+| 7 | Video Training Scripts | Async training video script per role |
+| 8 | AI Adoption Challenge | 30-day team competition with scoring system |
+| 9 | AI Wins Log | Ongoing ROI tracking + case study template |
+
+All outputs land in `outputs/<client-id>/content-engine/` and are added to the delivery repo under `08-content-engine/`.
+
+---
+
 ## Optional Modules
 
 These repos extend AI Integraterz with additional capability. Clone as sibling directories and enable in `config/project.json`.
@@ -110,14 +144,14 @@ These repos extend AI Integraterz with additional capability. Clone as sibling d
 
 ## Value Ladder
 
-| Step | Product | Price |
-|------|---------|-------|
-| Free | Discovery Call (extraction) | $0 |
-| 1 | AI Integraterz Training Package | $997 |
-| 2 | Ongoing Coaching + Certification | $300/mo/seat |
-| 3 | AI Integrator VA Placement | Setup + retainer |
-| 4 | AI Operations Hub | $2,000 setup |
-| 5 | Full GTM Deployment | $5K-$10K + $2K-$3.5K/mo |
+| Step | Product | Price | Type |
+|------|---------|-------|------|
+| Free | Discovery Call | $0 | Lead gen |
+| 1 | AI Integraterz Training Package | $997 | One-time |
+| 2 | AI Integrator Placement | $2,000 (downsell: $1,000) | One-time |
+| 3 | Training Contracts | $300/mo per seat | Recurring |
+| 4 | Expert Series | Varies | One-time or retainer |
+| 5 | Full GTM Deployment | $5K–$10K + $2K–$3.5K/mo | Setup + recurring |
 
 ---
 

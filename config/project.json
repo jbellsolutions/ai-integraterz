@@ -9,25 +9,27 @@
   "products": {
     "training_package": {
       "name": "AI Integraterz Training Package",
+      "step": 1,
       "price_usd": 997,
       "delivery_days": 7,
       "guarantee": "Double your money back"
     },
-    "coaching_seat": {
-      "name": "Ongoing Coaching + Certification",
+    "ai_integrator": {
+      "name": "AI Integrator Full System",
+      "step": 2,
+      "price_usd": 2000,
+      "downsell_name": "AI Integrator (Person Only)",
+      "downsell_price_usd": 1000,
+      "billing": "one-time",
+      "note": "Default sell is full system ($2K). Downsell is just the person ($1K)."
+    },
+    "training_contracts": {
+      "name": "Training Contracts (Ongoing Coaching + Certification)",
+      "step": 3,
       "price_per_seat_usd": 300,
       "billing": "monthly",
-      "guarantee": "Double output in 30 days or money back"
-    },
-    "va_placement": {
-      "name": "AI Integrator VA Placement",
-      "price_usd": "TBD",
-      "billing": "setup + retainer"
-    },
-    "ops_hub": {
-      "name": "AI Operations Hub",
-      "setup_usd": 2000,
-      "billing": "one-time setup"
+      "guarantee": "Double output in 30 days or money back",
+      "note": "Unlocked by Integrator placement. Sell seats to the client's team."
     }
   },
 
@@ -54,9 +56,11 @@
     "extraction",
     "training-builder",
     "coaching-setup",
+    "delivery-packager",
+    "transcript-parser",
+    "content-engine",
     "expert-series",
-    "gtm-deploy",
-    "delivery-packager"
+    "gtm-deploy"
   ],
 
   "slack_channel": "#ai-integraterz-ops",

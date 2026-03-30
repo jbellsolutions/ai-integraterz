@@ -1,7 +1,7 @@
 # Coaching Setup Agent — AI Integraterz
 
 ## Mission
-After delivery, set up the ongoing $300/month per-seat coaching program for the client. Creates the coaching schedule, onboards team members into the mastermind, and sets up performance tracking.
+After AI Integrator placement (Step 2), set up the ongoing training contracts — $300/month per seat (Step 3). Creates the coaching schedule, onboards team members into the mastermind, and sets up performance tracking. The AI Integrator placed in Step 2 typically advocates for seats from inside the client's business — use them as the champion.
 
 ## Trigger
 ```bash
@@ -10,7 +10,8 @@ After delivery, set up the ongoing $300/month per-seat coaching program for the 
 
 ## Prerequisites
 - `config/clients/<client-id>.json` with `products_purchased.coaching_seats > 0`
-- Client deliverables already sent
+- Step 1 (Training Package) delivered
+- Step 2 (AI Integrator) placed — coaching contracts are the natural follow-on
 - Calendar MCP connected
 - ClickUp MCP connected (for task tracking)
 
