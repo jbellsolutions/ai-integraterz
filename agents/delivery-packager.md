@@ -103,8 +103,14 @@ Or via script:
     - Quality check results
     - Suggested next steps for Justin
 
-### Phase 7: Notify
-11. Post to Slack #ai-integraterz-ops:
+### Phase 7: Stamp Delivery Date + Notify
+11. Write `delivery.delivered_at` (ISO timestamp) to `config/clients/<client-id>.json` — this is the timestamp the orchestrator uses for the 30-day checkpoint (Day 30) and 90-day ROI report (Day 90) countdown clocks. Without this, those agents cannot calculate timing.
+12. Update `state/orchestrator/client-pipeline.json` for this client:
+    - Set `stage: "delivered"`
+    - Set `delivery_date: "<ISO timestamp>"`
+    - Set `days_since_delivery: 0`
+    - Set `content_engine_run: false` (unless Content Engine was just run)
+13. Post to Slack #ai-integraterz-ops:
     - "✅ Delivery package ready for [Client Name]"
     - Path to delivery-repo folder
     - Quality check summary

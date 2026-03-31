@@ -59,6 +59,7 @@
   ],
 
   "products_purchased": {
+    "tier": "build_997",
     "training_package": true,
     "coaching_seats": 4,
     "va_placement": false,
@@ -69,6 +70,7 @@
 
   "delivery": {
     "package_due_date": "2026-04-05",
+    "delivered_at": null,
     "delivery_method": "repo + email",
     "status": "pending"
   }

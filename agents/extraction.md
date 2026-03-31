@@ -117,7 +117,15 @@ If `--pre-call` flag is set OR if no transcript is provided yet, generate a cust
 12. Verify at least one role is defined
 
 ### Phase 5: Update Pipeline
-13. Add or update this client in `state/orchestrator/client-pipeline.json` with stage `"extraction_complete"`
+13. Add or update this client in `state/orchestrator/client-pipeline.json` with:
+    - `stage: "extraction_complete"`
+    - `client_id`, `client_name` (from `business.name`)
+    - `tier` (from `products_purchased.tier` or derived from `products_purchased.training_package`)
+    - `coaching_seats` (from `products_purchased.coaching_seats`, default 0)
+    - `va_placement` (from `products_purchased.va_placement`, default false)
+    - `created_at`: now
+    - `stage_updated_at`: now
+    - All boolean flags set to false, all nullable fields set to null
 14. Update `state/extraction/last-run.json`
 
 ### Phase 6: Notify

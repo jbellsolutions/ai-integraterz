@@ -14,10 +14,13 @@ warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
 err()   { echo -e "${RED}[ERR]${NC}   $*" >&2; }
 
 # ─── Parse arguments ───────────────────────────────────────────────────────
-AGENT_NAME="${1:?Usage: run-agent.sh <agent-name> [--client <id>] [--auto]}"
+AGENT_NAME="${1:?Usage: run-agent.sh <agent-name> [--client <id>] [--auto] [--transcript <file>] [--update <event>] [--response] [--pre-call]}"
 CLIENT_ID=""
 AUTO_FLAG=""
 TRANSCRIPT_FILE=""
+UPDATE_EVENT=""
+RESPONSE_FLAG=""
+PRE_CALL_FLAG=""
 
 shift
 while [[ $# -gt 0 ]]; do
@@ -25,6 +28,9 @@ while [[ $# -gt 0 ]]; do
     --client)     CLIENT_ID="$2"; shift 2 ;;
     --auto)       AUTO_FLAG="--allowedTools '*'"; shift ;;
     --transcript) TRANSCRIPT_FILE="$2"; shift 2 ;;
+    --update)     UPDATE_EVENT="$2"; shift 2 ;;
+    --response)   RESPONSE_FLAG="true"; shift ;;
+    --pre-call)   PRE_CALL_FLAG="true"; shift ;;
     *) warn "Unknown argument: $1"; shift ;;
   esac
 done
@@ -32,7 +38,10 @@ done
 echo "========================================"
 echo " AI Integraterz Agent: ${AGENT_NAME}"
 echo " $(date)"
-[[ -n "$CLIENT_ID" ]] && echo " Client: ${CLIENT_ID}"
+[[ -n "$CLIENT_ID" ]]    && echo " Client: ${CLIENT_ID}"
+[[ -n "$UPDATE_EVENT" ]] && echo " Update event: ${UPDATE_EVENT}"
+[[ -n "$RESPONSE_FLAG" ]] && echo " Mode: response processing"
+[[ -n "$PRE_CALL_FLAG" ]] && echo " Mode: pre-call"
 echo "========================================"
 
 # ─── Load env ──────────────────────────────────────────────────────────────
@@ -97,6 +106,9 @@ PROMPT=$(cat <<PROMPTEOF
 **Timestamp:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 **Project Root:** ${PROJECT_ROOT}
 ${CLIENT_ID:+**Client ID:** ${CLIENT_ID}}
+${UPDATE_EVENT:+**Update Event:** ${UPDATE_EVENT}}
+${RESPONSE_FLAG:+**Mode:** response (process owner's check-in response)}
+${PRE_CALL_FLAG:+**Mode:** pre-call (generate call script before the discovery call)}
 
 ## Your Playbook
 ${PLAYBOOK_CONTENT}

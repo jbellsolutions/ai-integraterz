@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "patterns": [
     {
       "id": "missing-client-config",
@@ -32,7 +32,87 @@
       "fix": "Re-run training-builder with --auto flag or check for Claude API errors in last run",
       "confidence": 0.8,
       "occurrences": 0
+    },
+    {
+      "id": "slack-token-missing",
+      "description": "client-slack-setup fails because SLACK_BOT_TOKEN is not set",
+      "trigger": "SLACK_BOT_TOKEN not set",
+      "fix": "Set SLACK_BOT_TOKEN in .env. Get from api.slack.com → Your Apps → OAuth & Permissions → Bot Token (starts with xoxb-). Re-run: ./lib/run-agent.sh client-slack-setup --client <id>",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "slack-channel-name-conflict",
+      "description": "Slack channel creation fails because channel name already exists",
+      "trigger": "channel already exists",
+      "fix": "The client-slack-setup agent auto-appends -2/-3 suffix. If it failed, manually rename or delete the conflicting channel and re-run.",
+      "confidence": 0.9,
+      "occurrences": 0
+    },
+    {
+      "id": "contract-tier-missing",
+      "description": "contract-generator cannot determine tier because products_purchased.training_package is missing",
+      "trigger": "Tier not set",
+      "fix": "Update config/clients/<client_id>.json — set products_purchased.training_package to one of: blueprint, cert_300, build_997, training_contracts. Then re-run: ./lib/run-agent.sh contract-generator --client <id>",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "checkpoint-not-due",
+      "description": "30-day-checkpoint runs before day 28 — too early",
+      "trigger": "days_since_delivery < 28",
+      "fix": "30-day checkpoint not due yet. Check delivery.delivered_at in client config. Orchestrator should not trigger until day 28+.",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "roi-report-no-checkpoint",
+      "description": "roi-report runs without 30-day checkpoint data — quality gate failure",
+      "trigger": "checkpoint_30_complete not true",
+      "fix": "Run 30-day-checkpoint first: ./lib/run-agent.sh 30-day-checkpoint --client <id>. Wait for owner response before generating ROI report if possible.",
+      "confidence": 0.95,
+      "occurrences": 0
+    },
+    {
+      "id": "roi-report-too-early",
+      "description": "roi-report triggered before 60 days — insufficient data",
+      "trigger": "days_since_delivery < 60",
+      "fix": "ROI report requires minimum 60 days of data. Check delivery.delivered_at. Do not run roi-report before day 60.",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "integrator-onboarding-no-deliverables",
+      "description": "integrator-onboarding runs before training-builder has produced deliverables",
+      "trigger": "No deliverables found in outputs",
+      "fix": "Run training-builder first: ./lib/run-agent.sh training-builder --client <id>. Then re-run: ./lib/run-agent.sh integrator-onboarding --client <id>",
+      "confidence": 1.0,
+      "occurrences": 0
+    },
+    {
+      "id": "automation-mapper-no-industry",
+      "description": "automation-mapper has no industry data — falls back to generic matrix",
+      "trigger": "industry not set in client config",
+      "fix": "Add business.industry to config/clients/<client_id>.json before running automation-mapper. If unknown, use 'General Business' and update after the call.",
+      "confidence": 0.8,
+      "occurrences": 0
+    },
+    {
+      "id": "expert-series-missing-sibling-repo",
+      "description": "expert-series.md references sibling repo path that doesn't exist",
+      "trigger": "../expert-series-v3/",
+      "fix": "Clone the expert-series-v3 repo to ~/Desktop/Expert Series/expert-series-v3",
+      "confidence": 0.9,
+      "occurrences": 0
+    },
+    {
+      "id": "upsell-cooldown-exceeded",
+      "description": "Orchestrator posting duplicate upsell signals within cooldown window",
+      "trigger": "upsell signal posted within cooldown_days",
+      "fix": "Check state/orchestrator/upsell-log.json — ensure orchestrator reads upsell-log before posting signals.",
+      "confidence": 0.8,
+      "occurrences": 0
     }
   ],
-  "last_updated": "2026-03-29"
+  "last_updated": "2026-03-31"
 }

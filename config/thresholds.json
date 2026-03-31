@@ -24,5 +24,56 @@
     "max_linkedin_posts_per_day": 3,
     "min_qualified_conversations_guarantee": 10,
     "guarantee_window_days": 60
+  },
+  "automation_mapper": {
+    "min_automation_candidates": 3,
+    "max_priority_score": 50,
+    "top_automations_to_output": 3,
+    "industry_benchmark_fallback": true
+  },
+  "contract_generator": {
+    "payment_due_days": 3,
+    "training_contracts_cancellation_notice_days": 30,
+    "nda_term_years": 2,
+    "default_tier_if_missing": "build_997"
+  },
+  "integrator_onboarding": {
+    "internal_champion_onboarding_days": 3,
+    "placed_integrator_onboarding_days": 7,
+    "certification_target_days": 7,
+    "min_wins_for_certification": 10,
+    "min_team_members_onboarded": 2
+  },
+  "checkpoint_30": {
+    "trigger_days": 30,
+    "early_trigger_days": 28,
+    "followup_days": 7,
+    "roi_report_due_days": 90
+  },
+  "roi_report": {
+    "trigger_days": 90,
+    "early_trigger_days": 85,
+    "min_days_before_run": 60,
+    "case_study_roi_threshold": 5,
+    "conservative_reduction_estimate_pct": 70,
+    "owner_hourly_rate_default": 150,
+    "employee_hourly_rate_default": 50
+  },
+  "client_slack_setup": {
+    "channel_name_max_chars": 21,
+    "channel_prefix": "client-",
+    "retry_max": 3,
+    "retry_delay_seconds": 30
+  },
+  "orchestrator": {
+    "heartbeat_interval_minutes": 30,
+    "morning_brief_hour_et": 8,
+    "evening_brief_hour_et": 20,
+    "stuck_stage_alert_hours": 48,
+    "content_engine_trigger_days": 7,
+    "upsell_cooldown_days": 7,
+    "build997_integrator_pitch_delay_days": 3,
+    "build997_training_pitch_delay_days": 14,
+    "cert300_upsell_delay_days": 7
   }
 }

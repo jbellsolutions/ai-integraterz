@@ -2,7 +2,7 @@
 
 ## System Overview
 
-AI Integraterz runs on 6 agents. Each is a Claude Code playbook in `agents/`. All run through `lib/run-agent.sh`. Agents do not call each other directly — they communicate via state files and the orchestrator.
+AI Integraterz runs on 14 agents. Each is a Claude Code playbook in `agents/`. All run through `lib/run-agent.sh`. Agents do not call each other directly — they communicate via state files and the orchestrator.
 
 ---
 
@@ -76,17 +76,91 @@ AI Integraterz runs on 6 agents. Each is a Claude Code playbook in `agents/`. Al
 
 ---
 
+### automation-mapper *(P1 Gap #1)*
+**File:** `agents/automation-mapper.md`
+**Schedule:** Pre-call (run before or during the One-Hour Game Plan call)
+**Trigger:** `./lib/run-agent.sh automation-mapper --client <id> [--pre-call]`
+**Role:** Runs the Automation Priority Matrix LIVE on the call. Scores workflow candidates, identifies top 3 automations, captures owner quotes for voice-matching, feeds ranked list into extraction config.
+**Reads:** `config/clients/<id>.json` (pre-call info)
+**Writes:** `outputs/<id>/call-prep/Automation-Priority-Matrix-[name].md`, appends `automation_priorities[]` to client config
+**Hands off to:** `extraction` (feeds ranked automations into the build)
+
+---
+
+### contract-generator *(P1 Gap #2)*
+**File:** `agents/contract-generator.md`
+**Schedule:** Auto-triggered after `extraction_complete`
+**Trigger:** `./lib/run-agent.sh contract-generator --client <id>`
+**Role:** Generates complete SOW + Mutual NDA from client config. Zero manual editing required. Outputs ready-to-send Markdown.
+**Reads:** `config/clients/<id>.json` (tier, pricing, owner info, team size)
+**Writes:** `outputs/<id>/contracts/SOW-NDA-[name]-[date].md`
+**Hands off to:** Justin (reviews + sends for signature)
+
+---
+
+### integrator-onboarding *(P1 Gap #3)*
+**File:** `agents/integrator-onboarding.md`
+**Schedule:** Auto-triggered after `training_complete`
+**Trigger:** `./lib/run-agent.sh integrator-onboarding --client <id>`
+**Role:** Trains and certifies the AI Integrator (internal champion or placed by Justin's team). Produces Profile Sheet, Certification Track, and Weekly Reporting Template.
+**Reads:** `config/clients/<id>.json`, `outputs/<id>/` (all built deliverables)
+**Writes:** `outputs/<id>/integrator/` (3 files)
+**Hands off to:** Integrator (self-directed 30-day track), Justin (if placed integrator needed)
+
+---
+
+### 30-day-checkpoint *(P2 Gap #5)*
+**File:** `agents/30-day-checkpoint.md`
+**Schedule:** Auto-triggered at Day 30 post-delivery
+**Trigger:** `./lib/run-agent.sh 30-day-checkpoint --client <id>` or `--response` flag for processing replies
+**Role:** Sends check-in email to owner at Day 30. Collects wins data. Generates internal summary with upsell signals and pre-populated ROI data for the 90-day report.
+**Reads:** `config/clients/<id>.json`, `state/orchestrator/client-pipeline.json`
+**Writes:** `outputs/<id>/checkpoints/` (email + summary), updates client config + pipeline state
+**Hands off to:** `roi-report` (feeds data at Day 90)
+
+---
+
+### roi-report *(P2 Gap #6)*
+**File:** `agents/roi-report.md`
+**Schedule:** Auto-triggered at Day 90 post-delivery
+**Trigger:** `./lib/run-agent.sh roi-report --client <id>`
+**Role:** Generates client-facing 90-Day ROI Card + internal version. Calculates hours saved, annual value, ROI multiplier. Drives case study candidates and expansion pitches.
+**Reads:** `config/clients/<id>.json`, wins log, 30-day summary, pipeline state
+**Writes:** `outputs/<id>/reports/` (client + internal versions), `state/case-studies/candidates.json`
+**Hands off to:** Justin (reviews + sends to client, pitches expansion)
+
+---
+
+### client-slack-setup *(P2 Gap #7)*
+**File:** `agents/client-slack-setup.md`
+**Schedule:** Auto-triggered immediately after `extraction_complete`
+**Trigger:** `./lib/run-agent.sh client-slack-setup --client <id> [--update <event>]`
+**Role:** Creates private Slack channel per client. Posts onboarding summary. Posts milestone updates throughout the engagement lifecycle.
+**Reads:** `config/clients/<id>.json`, pipeline state
+**Writes:** Slack channel (via API), stores channel ID in client config + pipeline state
+**External:** Slack API (SLACK_BOT_TOKEN required)
+**Hands off to:** All agents (milestone updates post here automatically)
+
+---
+
 ## Handoff Protocol
 
 ```
-Justin's call
-    └──► extraction (manual trigger by Justin)
-              └──► [Justin reviews config]
-                        └──► training-builder (manual trigger)
-                                  └──► delivery-packager (auto or manual)
-                                            └──► [Justin sends to client]
-                                                      └──► coaching-setup (manual trigger)
-                                                                └──► orchestrator (monitors ongoing)
+Pre-call research
+    └──► automation-mapper (Justin triggers before/during call)
+              └──► Justin's One-Hour Game Plan call
+                        └──► extraction (manual trigger by Justin)
+                                  └──► contract-generator (auto)
+                                  └──► client-slack-setup (auto)
+                                  └──► [Justin reviews config]
+                                            └──► training-builder (manual trigger)
+                                                      └──► integrator-onboarding (auto)
+                                                      └──► delivery-packager (auto or manual)
+                                                                └──► [Justin sends to client]
+                                                                          └──► coaching-setup (manual trigger)
+                                                                                    └──► orchestrator (monitors ongoing)
+                                                                                              └──► 30-day-checkpoint (auto, Day 30)
+                                                                                                        └──► roi-report (auto, Day 90)
 ```
 
 Optional cross-sell at any point after extraction:

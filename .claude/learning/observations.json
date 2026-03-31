@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "observations": [
     {"timestamp": "2026-03-29T00:10:00Z", "type": "security_note", "detail": "lib/run-agent.sh uses eval to pass AUTO_FLAG to claude CLI. AUTO_FLAG is only set from --auto argument, not user input, so injection risk is minimal but worth documenting."},
     {"timestamp": "2026-03-29T00:10:00Z", "type": "scale_note", "detail": "136 placeholder tokens across 7 templates. As client count grows, a placeholder miss report after each training-builder run would reduce delivery QA time."},
@@ -7,9 +7,35 @@
     {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "136 placeholder tokens across 7 templates — training-builder must replace all of them from client config. High-risk area for incomplete output."},
     {"timestamp": "2026-03-29T00:00:00Z", "type": "hypothesis", "detail": "Placeholder miss rate will be the #1 source of delivery quality issues. Mitigation: delivery-packager quality check already scans for '{{' in outputs."},
     {"timestamp": "2026-03-29T00:00:00Z", "type": "pattern_scan", "detail": "expert-series.md references sibling repo path '../expert-series-v3/' — path validation missing from agent"},
-    {"timestamp": "2026-03-29T00:00:00Z", "type": "recommendation", "detail": "Add path existence check to expert-series.md Phase 1 before attempting to use sibling repo"}
+    {"timestamp": "2026-03-29T00:00:00Z", "type": "recommendation", "detail": "Add path existence check to expert-series.md Phase 1 before attempting to use sibling repo"},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "architecture_change", "detail": "6 new agent playbooks added: automation-mapper, contract-generator, integrator-onboarding, 30-day-checkpoint, roi-report, client-slack-setup. All Framework P1/P2 gaps now covered."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "architecture_change", "detail": "Orchestrator updated with upsell detection logic (5 signals), auto-trigger queue, and full time-based pipeline triggers. Smart orchestration now active."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "pattern_scan", "detail": "AGI-1 healing patterns updated with 10 new patterns covering all new agents. Patterns cover Slack token failures, contract tier missing, checkpoint timing, ROI data quality gate, and upsell cooldown."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "gap_note", "detail": "state/case-studies/ directory referenced by roi-report.md but not yet created. Need to mkdir and add candidates.json stub."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "gap_note", "detail": "state/orchestrator/upsell-log.json referenced by orchestrator.md but stub file not yet created. Orchestrator will fail to read it on first run."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "recommendation", "detail": "Create state stubs for upsell-log.json and case-studies/candidates.json to prevent first-run errors."},
+    {"timestamp": "2026-03-31T00:00:00Z", "type": "security_note", "detail": "client-slack-setup.md originally referenced project.json for Justin's Slack user ID. Corrected to use SLACK_JUSTIN_USER_ID env var — keeps credentials out of committed config files."}
   ],
-  "hypotheses": [],
+  "hypotheses": [
+    {
+      "id": "h001",
+      "hypothesis": "The most common first failure point will be SLACK_BOT_TOKEN missing — client-slack-setup is the first auto-triggered new agent and most setups won't have Slack configured immediately.",
+      "status": "unconfirmed",
+      "created_at": "2026-03-31"
+    },
+    {
+      "id": "h002",
+      "hypothesis": "The 30-day checkpoint email response rate will be <50% without a follow-up sequence. Consider adding a 3-day follow-up if no response.",
+      "status": "unconfirmed",
+      "created_at": "2026-03-31"
+    },
+    {
+      "id": "h003",
+      "hypothesis": "ROI report with no check-in data will use conservative 70% reduction estimate — real data will almost always show higher savings. Track delta to validate estimate accuracy.",
+      "status": "unconfirmed",
+      "created_at": "2026-03-31"
+    }
+  ],
   "confirmed_patterns": [],
-  "last_research_run": null
+  "last_research_run": "2026-03-31"
 }
